@@ -1,60 +1,51 @@
-# 🚀 API de Produtos
+# 📦 ProdutoAPI - CRUD de Produtos com Spring Boot
 
-Este repositório centraliza o desenvolvimento de um ecossistema moderno de microsserviços voltados para a gestão inteligente de clientes e pedidos, cobrindo desde a modelagem inicial e conteinerização até o deploy em nuvem e segurança avançada. O projeto foi estruturado seguindo as melhores práticas do mercado, ideal para demonstrar habilidades de engenharia de software prontas para o ambiente corporativo.
+Este repositório contém o desenvolvimento da primeira etapa da minha jornada de transição de carreira para o desenvolvimento de software. Trata-se de uma aplicação RESTful simples e focada, construída para fixar os conceitos fundamentais do ecossistema **Spring Boot**, persistência de dados com **Spring Data JPA** e manipulação estruturada em banco de dados.
 
----
-
-## 🛠️ O que está sendo desenvolvido (Stack & Recursos)
-
-### ☕ Do Zero ao Deploy com Java Moderno
-* **Fundamentos Sólidos:** Construção estruturada a partir do Java Básico e conceitos avançados de Orientação a Objetos (OO).
-* **Evolução de Versões:** Preparado para explorar as capacidades modernas das novas especificações do Java (Java 17 até Java 25).
-
-### 🗄️ Persistência Eficiente com Spring Data JPA
-* **Mapeamento Objeto-Relacional (ORM):** Modelagem de entidades complexas e relacionamentos utilizando o Hibernate.
-* **Manipulação de Dados:** Abordagem limpa através de interfaces que estendem `JpaRepository`.
-* **Consultas Avançadas:** Implementação futura e estudos voltados para *Query Methods*, *Specifications* e *Query By Example* para buscas dinâmicas e performáticas.
-
-### 🏛️ Arquitetura e Ecossistema Spring Framework
-* **Divisão de Responsabilidades:** Arquitetura estritamente dividida em camadas lógicas: **Controller** (Garçom), **Service** (Cozinheiro) com controle transacional rigoroso (`@Transactional`), e **Repository** (Despensa).
-* **Inversão de Controle e Injeção de Dependências:** Código altamente desacoplado e testável aproveitando o motor do Spring.
-
-### 🌐 APIs RESTful de Alto Nível & Design de Contratos
-* **Padrões de Projeto (Design Patterns):** Uso estratégico de **DTOs (Data Transfer Objects)** e **Records** modernos para tráfego seguro de dados na rede, otimização de memória JVM e encapsulamento de entidades do banco.
-* **Componentes Auxiliares:** Estruturas focadas em mapeamento automático de objetos (MapStruct/ModelMapper) e tratamento global de exceções (Exception Handler/`@ControllerAdvice`).
-* **Design de Contratos:** Domínio completo do protocolo HTTP, versionamento de recursos, paginação e uso correto dos verbos (GET, POST, PUT, DELETE).
-
-### 🔒 Segurança Avançada, OAuth2 & Keycloak
-* **Spring Security:** Controle rígido de autenticação e autorização baseado em permissões e perfis de acesso (*Role-Based Access Control*).
-* **Mecanismos de Login:** Implementações englobando desde autenticação *Basic* e formulários customizados até **Login Social integrado com o Google**.
-* **OAuth2 & Protocolos Modernos:** Criação de um servidor de autorização próprio (*Authorization Server*) e integração com **Keycloak** para gestão centralizada de identidades e acessos seguros em microsserviços.
-
-### 🐳 Infraestrutura & DevOps Simplificado com Docker
-* **Isolamento de Ambientes:** Uso de containers Docker para subir instâncias locais de bancos de dados relacionais (**PostgreSQL** e **MySQL**) de forma ágil e isolada, sem poluir o sistema operacional host.
-* **Gerenciamento visual:** Integração direta com ferramentas client de mercado como o **DBeaver** para validação estrutural das tabelas.
-
-### ☁️ Cloud Computing com AWS (Amazon Web Services)
-* **Banco de Dados Gerenciado:** Provisionamento e conexão de bancos de dados relacionais na nuvem através do **Amazon RDS**.
-* **Deploy em Produção:** Hospedagem, configuração e deploy prático da aplicação Spring Boot utilizando instâncias virtuais de servidores **Amazon EC2**.
-
-### 🧪 Testes de Software & Qualidade de Código
-* **Garantia de Entrega:** Escrita de testes unitários automatizados e testes de integração de ponta a ponta para blindar as regras de negócio contra regressões.
-
-### 📝 Documentação e Consumo de APIs
-* **Swagger & OpenAPI:** Habilitação, configuração e customização da documentação interativa das rotas da API, incluindo as definições de segurança e tokens.
-* **Postman:** Criação e organização de coleções (*Collections*) HTTP para testes manuais automatizados de endpoints durante o fluxo de desenvolvimento.
+O objetivo principal desta fase foi dominar o fluxo completo de um CRUD (Create, Read, Update, Delete) utilizando uma arquitetura em camadas bem definida.
 
 ---
 
-## ⚙️ Como Executar o Projeto Localmente
+## 🛠️ Recursos & Funcionalidades Desenvolvidas
 
-### Pré-requisitos
-* Java 21 ou superior instalado.
-* Docker e Docker Compose instalados.
-* Uma IDE de sua preferência (Recomendado: IntelliJ IDEA).
-* Postman ou DBeaver para testes de rotas e banco.
+A **ProdutoAPI** foi construída para gerenciar o ciclo de vida de produtos com as seguintes capacidades e endpoints:
 
-### Passos para Execução
-1. **Subir o Banco de Dados no Docker:**
-   ```bash
-   docker run --name postgres-inova -e POSTGRES_DB=inovapedidos -e POSTGRES_PASSWORD=suasenha -p 5555:5432 -d postgres
+* **Criar e Salvar Produtos (`POST`):** Endpoint responsável por receber os dados de um novo produto e persistir as informações com segurança no banco de dados.
+* **Pesquisar por ID (`GET` / `:id`):** Consulta cirúrgica ao banco de dados para retornar os detalhes de um produto específico com base no seu código identificador.
+* **Consultar por Nome (`GET`):** Implementação de busca customizada utilizando métodos de consulta (*Query Methods*) do Spring Data para localizar registros pelo nome do produto.
+* **Atualizar ou Editar (`PUT`):** Fluxo para alteração e sincronização imediata de dados cadastrais de produtos existentes.
+* **Deletar Produtos (`DELETE`):** Endpoint para exclusão segura de registros do banco de dados.
+
+---
+
+## 🏛️ Detalhes Técnicos & Arquitetura
+
+Para garantir uma aplicação organizada e de fácil manutenção, o projeto seguiu o padrão de **Arquitetura em Camadas**:
+
+1. **Model (Entity):** Classe Java que representa a tabela de produtos no banco de dados, mapeada utilizando as anotações do JPA/Hibernate.
+2. **Repository:** Interface que estende `JpaRepository`, fornecendo todos os métodos de persistência SQL prontos, além de consultas customizadas por nome.
+3. **Service:** Camada onde reside a lógica do sistema e o controle transacional rigoroso com o uso do Spring `@Transactional` para garantir a sincronia e integridade dos dados.
+4. **Controller (API):** A porta de entrada da aplicação (`ProdutoApi`), responsável por expor as URLs e receber/responder as requisições HTTP (JSON).
+
+### ⚡ Otimização com Lombok
+Nesta fase inicial, o **Lombok** foi integrado de forma cirúrgica na camada de serviços e modelos para automatizar a geração de rotinas repetitivas como `Getters` e `Setters`, mantendo o código limpo, legível e otimizando o tempo de desenvolvimento.
+
+---
+
+## 🔧 Tecnologias Utilizadas
+
+* **Java 21**
+* **Spring Boot 3**
+* **Spring Data JPA** (Hibernate)
+* **Banco de Dados em Memória H2** 
+* **Lombok**
+* **Postman** (Client HTTP utilizado para testar e validar todos os endpoints do CRUD)
+
+---
+
+## 🔄 Conclusão desta Fase
+
+Este repositório marca o encerramento com sucesso da **Fase 1** do treinamento. Todo o fluxo essencial de manipulação de dados foi testado e validado via Postman, garantindo uma fundação sólida em APIs RESTful e Spring Boot para os próximos módulos do curso.
+
+---
+💡 *Fase 1 concluída com sucesso. Pronto para iniciar o próximo repositório focado em arquiteturas mais robustas, microsserviços, DTOs e segurança avançada!*
